@@ -15,7 +15,7 @@ export class EmpRegistrationComponent implements OnInit {
 	}
 	empRegFormSave(formGroup){
 		console.log(formGroup)
-		console.log("Form value accessed using the formGroup: "+ formGroup.value.empName);
+		console.log("Form value accessed using the formGroup: "+ formGroup.value.empreggroup.empName);
 	}
 
 }
