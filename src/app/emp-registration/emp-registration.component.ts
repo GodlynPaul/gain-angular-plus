@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-	selector: 'app-emp-registration',
+	selector: 'emp-registration',
 	templateUrl: './emp-registration.component.html',
 	styleUrls: ['./emp-registration.component.css']
 })
