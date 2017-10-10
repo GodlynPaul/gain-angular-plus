@@ -12,8 +12,14 @@ export class ContractEmpRegistrationComponent implements OnInit {
   ngOnInit(){}
 
   contactEmployee = new FormGroup({
-    conEmpName : new FormControl(),
-    conEmpSector : new FormControl()
-  })
-
+    conEmpName : new FormControl('',Validators.required),
+    conEmpSector : new FormControl('',[Validators.required, Validators.minLength(3)]),
+    conCompany : new FormControl('',[Validators.required, Validators.minLength(3)])
+  });
+  get gConEmpName(){
+    return this.contactEmployee.get('conEmpName');
+  };
+  get gConCompany(){
+    return this.contactEmployee.get('conCompany');
+  };
 }
