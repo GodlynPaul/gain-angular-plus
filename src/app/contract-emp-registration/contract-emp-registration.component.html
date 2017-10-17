@@ -22,4 +22,12 @@
     <div class="alert alert-danger" *ngIf="gConCompany.errors && gConCompany.errors.required && gConCompany.touched">Company is mandatory</div>
     <div class="alert alert-danger" *ngIf="gConCompany.errors && gConCompany.errors.minlength && gConCompany.touched">Minlength : 3</div>
   </div>
+
+  <div class="form-group">
+    <label for="conEmpMobile">Mobile</label>
+    <input id="conEmpMobile" type="text" name="conEmpMobile" class="form-control" value=""
+    formControlName="conEmpMobile">
+    <div class="alert alert-danger" *ngIf="gConEmpMobile.errors.required">Invalid contact number </div>
+    <!-- <div class="alert alert-danger" *ngIf="gConEmpMobile.errors.cannotContainMinus">Invalid contact number </div> -->
+  </div>
 </form>
