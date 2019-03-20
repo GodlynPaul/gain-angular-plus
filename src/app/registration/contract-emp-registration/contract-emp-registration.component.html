@@ -1,0 +1,69 @@
+<!-- Reactive Forms using the formControl-->
+<h1> Contract Employee </h1>
+
+<form [formGroup]="contactEmployee" (ngSubmit)="registerContractEmployee()">
+
+  <div class="alert alert-danger" *ngIf="contactEmployee.errors && contactEmployee.errors.customValidationErrFromServer">
+    Backend validation : Invalid data recieved
+  </div>
+
+  <div class="form-group">
+    <label for="conEmpName">Employee Name</label>
+    <input id="conEmpName" type="text" name="conEmpName" class="form-control" formControlName="conEmpName" />
+    <div class="alert alert-danger" *ngIf="gConEmpName.touched && gConEmpName.errors && gConEmpName.invalid">
+      Employee name is mandatory
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="conEmpSector">Sector</label>
+    <input id="conEmpSector" type="text" name="conEmpSector" class="form-control" formControlName="conEmpSector" />
+    <div class="alert alert-danger" *ngIf="contactEmployee.get('conEmpSector').touched && contactEmployee.get('conEmpSector').invalid">
+      Sector is mandatory with maximium of 10 characters
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="conCompany">Company</label>
+    <input id="conCompany" type="text" name="conCompany" class="form-control" formControlName="conCompany" />
+    <div class="alert alert-danger " *ngIf="gConCompany.errors && gConCompany.touched">
+      <span *ngIf="gConCompany.errors.required">Company is mandatory</span>
+      <span *ngIf="gConCompany.errors.minlength">
+        Required minimum of {{gConCompany.errors.minlength.requiredLength}} characters
+      </span>
+      <span *ngIf="gConCompany.errors.cannotContainSpace">Space not allowed </span>
+    </div>
+  </div>
+
+  <div formGroupName="conContacts">
+    <div class="form-group">
+      <label for="conEmpMobile">Mobile</label>
+      <input id="conEmpMobile" type="text" name="conEmpMobile" class="form-control" formControlName="conEmpMobile">
+      <div class="alert alert-danger" *ngIf="gConEmpMobile.touched && gConEmpMobile.errors && gConEmpMobile.errors.required">
+        Invalid contact number
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="conEmpEmergency">Emergency Contact</label>
+      <input id="conEmpEmergency" type="text" name="conEmpEmergency" class="form-control" formControlName="conEmpEmergency">
+      <div class="alert alert-danger" *ngIf="gConEmpEmergency.touched && gConEmpEmergency.errors && gConEmpEmergency.errors.required">
+        Invalid Emergency number
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="conSkillset">Skill Set</label>
+    <input type="text" name="conSkillset" class="form-control" #skillset />
+    <input type="button" (click)="addSkillset(skillset)" value="ADD" class="btn btn-default">
+    <div class="alert alert-danger" *ngIf="gConSkillset.errors && gConSkillset.invalid">Skills are mandatory</div>
+    <ul>
+      <li *ngFor="let skill of contactEmployee.get('conSkillset').controls">
+        <span class="col-xs-12 col-sm-12 col-lg-10">{{skill.value}} </span>
+        <input type="button" value="x" (click)="removeSkillset(skill.value)" class="btn">
+      </li>
+    </ul>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="SUBMIT" />
+</form>

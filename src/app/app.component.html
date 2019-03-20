@@ -1,8 +1,14 @@
-<div style="text-align:center">
-  <h2>Godlyn Paul</h2>
-</div>
+<div class="col-xs-12 col-md-12 col-md-12 col-lg-12">
+  <div style="text-align:center">
+    <h2>REGISTRATION</h2>
+  </div>
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li routerLinkActive="active"><a [routerLink]="['/register/employee-registration']">Employee</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/register/security-registration']">Security</a></li>
+      <li [routerLinkActive]="['active']"><a [routerLink]="['/register/contract-registration']">Contract</a></li>
+    </ul>
+  </nav>
 
-<div class="employeeRegistration">
-  <emp-registration> </emp-registration>
-  <contract-emp-registration> </contract-emp-registration>
+  <router-outlet></router-outlet>
 </div>

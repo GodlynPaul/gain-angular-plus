@@ -1,0 +1,75 @@
+<!-- Template Driven Form -->
+
+<h1> Employee </h1>
+<!-- If ngNoForm or formGroup not present on form then angular automatically apply ngForm directive on that element-->
+<form #empRegForm="ngForm" (ngSubmit)="empRegFormSave(empRegForm)">
+	<div ngModelGroup="empreggroup" #empreggroup="ngModelGroup">
+		
+		<!-- Validation performed based on the ngModelGroup -->
+		<div *ngIf="!empreggroup.valid">
+			Please fill the below form without errors.
+		</div>
+
+		<div class="form-group">
+			<label for="empName"> Name </label>
+			<input id="empName" type="text" class="form-control" required minlength="5" maxlength="20" ngModel name="empName"
+			 #empName="ngModel" (change)="regValidation(empName)">
+			<div class="alert alert-danger" *ngIf="empName.invalid && empName.touched">
+				<div *ngIf="empName.errors.required">Name is mandatory</div>
+				<div *ngIf="empName.errors.minlength">
+					Current length is {{empName.errors.minlength.actualLength}} but min length required is
+					{{empName.errors.minlength.requiredLength}}
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="cusEmpId">Custom Employee ID</label>
+			<input id="cusEmpId" type="text" class="form-control" required ngModel name="cusEmpId" pattern="[^' ']+">
+			<small [hidden]="!empRegForm?.controls?.empreggroup?.controls?.cusEmpId?.errors?.pattern" class="error">
+				Custom Employee ID should not contain space
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="curAdress">Current Address</label>
+			<textarea ngModel name="curAddress" rows="3" cols="50" class="form-control" required> </textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="perAddress">Permenant Address</label>
+			<textarea ngModel name="perAddress" rows="3" cols="50" class="form-control" required></textarea>
+		</div>
+
+		<div class="form-group">
+			<label>Technologies</label>
+			<div>
+				<input type="checkbox" ngModel name="uiTech"> UI Technology
+				<input type="checkbox" ngModel name="backEndTech"> BackEnd Technology
+				<input type="checkbox" ngModel name="tester"> Testing Technology
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="gender">Gender</label>
+			<select ngModel name="gender" id="gender" class="form-control">
+				<option value="">SELECT</option>
+				<!-- <option *ngFor="let g of gender" [value]="g.genderId">{{g.genderName}}</option> -->
+				<!-- Here in options [value] can store string  & [ngValue] we can store objects -->
+				<option *ngFor="let g of gender" [ngValue]="g">{{g.genderName}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Device Preference</label>
+			<div>
+				<span *ngFor="let sp of systemPreference">
+					<input type="radio" ngModel name="devicePreference" [value]="sp"> {{sp.sysName}}
+				</span>
+			</div>
+		</div>
+
+		<button class="btn btn-primary" [disabled]="!empRegForm.valid">Submit</button>
+	</div>
+ 	<!-- This can be used like a diagonasis tool -->
+	<!-- {{empRegForm.value|json}} -->
+</form>
